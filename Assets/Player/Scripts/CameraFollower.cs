@@ -15,7 +15,7 @@ public class CameraFollower : MonoBehaviour
 
     }
 
-    private void Update()
+    private void LateUpdate() // Gets the players position and sets the camera position
     {
         //playerPos = playerMovement.UpdatePos();
         playerPos = Manager.Instance.GetPlayer.transform.position;

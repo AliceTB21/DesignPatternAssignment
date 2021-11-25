@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float movementSpeed;
+    [SerializeField] private CharacterController controller;
     private float x, z;
     Vector3 moveDir;
 
@@ -20,7 +21,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        if(cameraRef == null)
         cameraRef = Camera.main;
+        if (controller == null)
+            controller = GetComponent<CharacterController>();
     }
 
     public Vector3 UpdatePos()
@@ -32,6 +36,12 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
 
+        LookAt();
+
+    }
+
+    private void LookAt()
+    {
         Ray ray = cameraRef.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
@@ -46,19 +56,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         lookPoint.y = 0;
-        
+
 
         transform.LookAt(lookPoint, Vector3.up);
-
-
     }
 
     private void HandleMovement()
     {
         z = Input.GetAxisRaw("Vertical");
         x = Input.GetAxisRaw("Horizontal");
-
-        moveDir = transform.position += new Vector3(x, 0, z) * movementSpeed * Time.deltaTime;
         moveDir.Normalize();
+        moveDir = new Vector3(x, 0, z) * movementSpeed * Time.deltaTime;
+
+        controller.Move(moveDir);
+        transform.position += moveDir;
+
     }
 }
