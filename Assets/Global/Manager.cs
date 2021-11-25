@@ -32,6 +32,6 @@ public class Manager : MonoBehaviour
 
     private void Initialize()
     {
-        player = GameObject.FindObjectOfType<Player>();
+        GetPlayer = GameObject.FindObjectOfType<Player>();
     }
 }
