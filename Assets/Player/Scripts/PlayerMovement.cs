@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         moveDir = new Vector3(x, 0, z) * movementSpeed * Time.deltaTime;
 
         controller.Move(moveDir);
-        transform.position += moveDir;
+        //transform.position += moveDir;
 
     }
 }
