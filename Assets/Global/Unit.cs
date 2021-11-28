@@ -4,5 +4,19 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private Stats stats;
+    [SerializeField] protected Stats stats;
+
+    private void Start()
+    {
+        if (stats == null)
+            stats = GetComponent<Stats>();
+
+
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+        stats.OnTakeDamage(damage);
+
+    }
 }

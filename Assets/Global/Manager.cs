@@ -22,12 +22,8 @@ public class Manager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-
-    }
-
-    private void Start()
-    {
         Initialize();
+
     }
 
     private void Initialize()

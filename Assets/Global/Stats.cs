@@ -10,7 +10,7 @@ public class Stats
 
     public float Health { get { return currentHealth; } protected set { currentHealth = value; } }
 
-    public void OnTakeDamage(float incomingDamage)
+    public virtual void OnTakeDamage(float incomingDamage)
     {
         Health -= incomingDamage;
 
@@ -21,7 +21,7 @@ public class Stats
         }
     }
 
-    public void OnHeal(float healAmount)
+    public virtual void OnHeal(float healAmount)
     {
         Health += healAmount;
         Health = Mathf.Clamp(healAmount, 0, maxHealth);
