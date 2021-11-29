@@ -9,6 +9,9 @@ public class Enemy : Unit
     [SerializeField] protected float attackRange = 3f;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected Transform target;
+    [SerializeField] protected float sightRadius;
+    [SerializeField] protected LayerMask targetLayerMask;
+    [SerializeField] protected float maxDetectionRage;
     [Header("Agent")]
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected float idleTimer;
@@ -70,18 +73,28 @@ public class Enemy : Unit
 
     private void Update()
     {
-        if(idleTimer > 0 && isWaiting)
+        Timer();
+        UpdateState(GetUnitPos);
+        Collider[] collider = Physics.OverlapSphere(transform.position, sightRadius, targetLayerMask);
+        if(collider[0])
+        {
+            target = collider[0].gameObject.transform;
+        }
+    }
+
+    private void Timer()
+    {
+        if (idleTimer > 0 && isWaiting)
         {
             idleTimer -= Time.deltaTime;
             idleTimer = Mathf.Clamp(idleTimer, 0, Mathf.Infinity);
 
-            if(idleTimer <= 0)
+            if (idleTimer <= 0)
             {
                 isWaiting = false;
 
             }
         }
-        UpdateState(GetUnitPos);
     }
 
     protected Vector3 GetRandomPosition()

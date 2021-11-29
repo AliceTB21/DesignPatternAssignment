@@ -12,7 +12,7 @@ public class PlayerUI : MonoBehaviour
     private void Start()
     {
         playerRef = Manager.Instance.GetPlayer;
-        playerRef.onHealthChanged += UpdateHealth; // Subscribes UpdateHealth to onHealthChanged, which makes sure it updates UpdateHealth whenever onHealthChanged getse invoked 
+        playerRef.onHealthChanged += UpdateHealth; // Subscribes UpdateHealth to onHealthChanged and updates it when there's a change
         healthText.text = playerRef.GetHealth.ToString();
     }
 

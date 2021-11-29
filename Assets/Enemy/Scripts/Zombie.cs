@@ -5,9 +5,6 @@ using UnityEngine;
 public class Zombie : Enemy
 {
     EnemyState state;
-    float distanceToPos;
-
-
     protected override void GetInfo()
     {
         if(target)
@@ -46,6 +43,14 @@ public class Zombie : Enemy
                     state = EnemyState.MoveToTarget;
                 break;
             case EnemyState.MoveToTarget:
+                if(distanceToTarget > maxDetectionRage)
+                {
+                    isWaiting = true;
+                    idleTimer = RandomTimer(5, 10);
+                    state = EnemyState.Idle;
+                    target = null;
+                }
+                
                 if (distanceToTarget < attackRange)
                 {
                     agent.isStopped = true;

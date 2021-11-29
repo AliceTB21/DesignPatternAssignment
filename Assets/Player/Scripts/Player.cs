@@ -16,10 +16,6 @@ public class Player : Unit
 
     }
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.E)) // Take damage by pressing E for testing purposes
