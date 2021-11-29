@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 public class Enemy : Unit
 {
+    [Header("Attack")]
     [SerializeField] protected float attackRange = 3f;
     [SerializeField] protected float attackSpeed;
-    [SerializeField] Unit targetToAttack;
     [SerializeField] protected Transform target;
+    [Header("Agent")]
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected float idleTimer;
     [SerializeField] protected Transform unitPos;
@@ -81,8 +82,6 @@ public class Enemy : Unit
             }
         }
         UpdateState(GetUnitPos);
-
-        GetInfo();
     }
 
     protected Vector3 GetRandomPosition()
