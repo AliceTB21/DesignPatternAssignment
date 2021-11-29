@@ -75,8 +75,13 @@ public class Enemy : Unit
     {
         Timer();
         UpdateState(GetUnitPos);
+        DetectionCheck();
+    }
+
+    private void DetectionCheck()
+    {
         Collider[] collider = Physics.OverlapSphere(transform.position, sightRadius, targetLayerMask);
-        if(collider[0])
+        if (collider[0])
         {
             target = collider[0].gameObject.transform;
         }
