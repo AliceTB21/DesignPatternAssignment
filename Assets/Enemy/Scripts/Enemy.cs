@@ -14,6 +14,8 @@ public class Enemy : Unit
     [SerializeField] protected Transform unitPos;
     [SerializeField] protected bool isWaiting = true;
 
+    protected Vector3 posToMove;
+
     protected enum EnemyState { Idle, Wandering, MoveToTarget, Attacking}
 
     public Transform GetUnitPos { get { return unitPos; } }
@@ -35,12 +37,20 @@ public class Enemy : Unit
 
             case EnemyState.Wandering:
                 Debug.Log("Wandering");
-                Vector3 newPos = GetRandomPosition();
-                agent.SetDestination(newPos);
+                posToMove = GetRandomPosition();
+                agent.SetDestination(posToMove);
                 break;
 
             case EnemyState.MoveToTarget:
                 Debug.Log("Move to target");
+                if (target)
+                {
+                    agent.SetDestination(target.position);
+                    isWaiting = false;
+                }
+                else
+                    isWaiting = true;
+
                 break;
 
             case EnemyState.Attacking:
@@ -59,16 +69,20 @@ public class Enemy : Unit
 
     private void Update()
     {
-        if(idleTimer > 0 && !isWaiting)
+        if(idleTimer > 0 && isWaiting)
         {
             idleTimer -= Time.deltaTime;
             idleTimer = Mathf.Clamp(idleTimer, 0, Mathf.Infinity);
 
             if(idleTimer <= 0)
             {
-                UpdateState(GetUnitPos);
+                isWaiting = false;
+
             }
         }
+        UpdateState(GetUnitPos);
+
+        GetInfo();
     }
 
     protected Vector3 GetRandomPosition()
@@ -79,5 +93,10 @@ public class Enemy : Unit
     protected float RandomTimer(float minTime, float maxTime)
     {
         return Random.Range(minTime, maxTime);
+    }
+
+    protected virtual void GetInfo()
+    {
+
     }
 }

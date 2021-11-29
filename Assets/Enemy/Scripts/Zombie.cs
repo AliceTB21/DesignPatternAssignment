@@ -5,14 +5,20 @@ using UnityEngine;
 public class Zombie : Enemy
 {
     EnemyState state;
-    
+    float distanceToPos;
 
-    protected override void UpdateState(Transform unitPos)
+
+    protected override void GetInfo()
     {
-        if (target != null)
-        {
-            float distanceToTarget = (unitPos.transform.position - target.position).magnitude;
-        }
+        if(target)
+        Debug.Log(target.position);
+    }
+
+    protected override void UpdateState(Transform playerPos)
+    {
+        float distanceToTarget = 0;
+        if(target)
+            distanceToTarget = (transform.position - target.position).magnitude;
 
         switch(state)
         {
@@ -20,22 +26,32 @@ public class Zombie : Enemy
                 if (idleTimer == 0 && isWaiting)
                 {
                     idleTimer = RandomTimer(5, 10);
-                    isWaiting = false;
                 }
+                else if (target)
+                    state = EnemyState.MoveToTarget;
                 else if (idleTimer <= 0)
                 {
                     state = EnemyState.Wandering;
                     idleTimer = 0;
-                    isWaiting = true;
+
                 }
                 break;
             case EnemyState.Wandering:
                 if(agent.velocity.magnitude < 1)
                 {
+                    isWaiting = true;
                     state = EnemyState.Idle;
                 }
+                else if (target)
+                    state = EnemyState.MoveToTarget;
                 break;
             case EnemyState.MoveToTarget:
+                if (distanceToTarget < attackRange)
+                {
+                    agent.isStopped = true;
+                }
+                else
+                    agent.isStopped = false;
 
                 break;
             case EnemyState.Attacking:
