@@ -6,6 +6,7 @@ public class Manager : MonoBehaviour
 {
     private static Manager instance;
     private Player player;
+    private BulletPool pool;
 
     public static Manager Instance {
         get
@@ -17,6 +18,8 @@ public class Manager : MonoBehaviour
             return instance;
         }
     }
+
+    public BulletPool GetPool { get { return pool; } private set { pool = value; } }
     public Player GetPlayer { get { return player; } private set { player = value; } }
 
     private void Awake()
@@ -28,6 +31,9 @@ public class Manager : MonoBehaviour
 
     private void Initialize()
     {
+        if(!player)
         GetPlayer = GameObject.FindObjectOfType<Player>();
+        if(!pool)
+        GetPool = GetComponent<BulletPool>();
     }
 }
