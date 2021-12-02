@@ -46,7 +46,6 @@ public class Projectile : MonoBehaviour
     {
         PoolReturnTimer();
 
-        //transform.position += Vector3.up * projectileSpeed * Time.deltaTime;
         rb.AddForce(direction.forward * projectileSpeed, ForceMode.Impulse);
     }
 

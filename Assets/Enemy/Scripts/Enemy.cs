@@ -76,18 +76,14 @@ public class Enemy : Unit
     {
         Timer();
         UpdateState(GetUnitPos);
-        DetectionCheck();
     }
 
-    private void DetectionCheck()
+    private void OnTriggerEnter(Collider other)
     {
-        /*colliders = Physics.OverlapSphere(transform.position, sightRadius, targetLayerMask);
-        if (colliders[0])
+        if(other.CompareTag("Player"))
         {
-            if (target == null)
-            target = colliders[0].gameObject.transform;
+            target = other.transform;
         }
-        */
     }
 
     private void Timer()
