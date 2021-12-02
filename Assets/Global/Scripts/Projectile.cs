@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float projectileDamage;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Transform direction;
 
     [Header("Pooling")]
     [SerializeField] private float timeUntilPool;
@@ -36,11 +37,17 @@ public class Projectile : MonoBehaviour
         timer = timeUntilPool;
     }
 
+    public void SetDirection(Transform position)
+    {
+        direction = position;
+    }
+
     private void Update()
     {
         PoolReturnTimer();
 
-        transform.position += Vector3.forward * projectileSpeed * Time.deltaTime;
+        //transform.position += Vector3.up * projectileSpeed * Time.deltaTime;
+        rb.AddForce(direction.forward * projectileSpeed, ForceMode.Impulse);
     }
 
     private void PoolReturnTimer()

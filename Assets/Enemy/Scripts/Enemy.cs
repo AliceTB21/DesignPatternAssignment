@@ -17,6 +17,7 @@ public class Enemy : Unit
     [SerializeField] protected float idleTimer;
     [SerializeField] protected Transform unitPos;
     [SerializeField] protected bool isWaiting = true;
+    [SerializeField] private Collider[] colliders;
 
     protected Vector3 posToMove;
 
@@ -80,11 +81,13 @@ public class Enemy : Unit
 
     private void DetectionCheck()
     {
-        Collider[] collider = Physics.OverlapSphere(transform.position, sightRadius, targetLayerMask);
-        if (collider[0])
+        /*colliders = Physics.OverlapSphere(transform.position, sightRadius, targetLayerMask);
+        if (colliders[0])
         {
-            target = collider[0].gameObject.transform;
+            if (target == null)
+            target = colliders[0].gameObject.transform;
         }
+        */
     }
 
     private void Timer()

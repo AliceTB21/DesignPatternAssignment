@@ -94,7 +94,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3095820505664323588}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -112,7 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDamage: 25
-  projectileSpeed: 0
+  projectileSpeed: 5
+  rb: {fileID: 0}
+  direction: {fileID: 0}
   timeUntilPool: 5
 --- !u!54 &-3123007576998997074
 Rigidbody:

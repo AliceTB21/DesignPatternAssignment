@@ -17,7 +17,14 @@ public class WeaponManager : MonoBehaviour
     private void Start()
     {
        Weapon weaponGO = Instantiate(test, weaponHolder);
-        weaponGO = primary;
-        weaponGO = currentWeapon;
+        primary = weaponGO;
+        SetCurrentWeapon(weaponGO);
+
+        Debug.Log("Spawned weapon;" + currentWeapon);
+    }
+
+    public void SetCurrentWeapon(Weapon newCurrent)
+    {
+        GetCurrentWeapon = newCurrent;
     }
 }

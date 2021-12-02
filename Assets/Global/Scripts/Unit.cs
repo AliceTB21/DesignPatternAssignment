@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField] protected Stats stats;
-
+    [SerializeField] protected string unitName = "Placeholder";
     private void Start()
     {
         if (stats == null)
@@ -17,6 +17,6 @@ public class Unit : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         stats.OnTakeDamage(damage);
-
+        Debug.Log(unitName + " was hit for: " + damage);
     }
 }

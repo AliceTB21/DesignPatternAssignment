@@ -8,12 +8,15 @@ public class Player : Unit
     public event OnHealthChanged onHealthChanged;
 
     [SerializeField] private WeaponManager weaponManager;
+    [SerializeField] private PlayerMovement movement;
     public float GetHealth { get { return stats.Health; } }
 
     private void Start()
     {
         if(!weaponManager)
         weaponManager = GetComponent<WeaponManager>();
+        if (!movement)
+            movement = GetComponent<PlayerMovement>();
     }
 
     public override void TakeDamage(float damage) // Substracts health with damage and invokes the onHealthChanged to subscribed methods
@@ -32,7 +35,7 @@ public class Player : Unit
         if(Input.GetButtonDown("Fire1"))
         {
             if(!weaponManager.GetCurrentWeapon) { Debug.Log("No weapon equipped"); return; }
-            weaponManager.GetCurrentWeapon.Shoot();
+            weaponManager.GetCurrentWeapon.Shoot(movement.GetDirection);
         }
     }
 

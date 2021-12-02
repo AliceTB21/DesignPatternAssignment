@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public delegate void OnMovementUpdate();
     public static event OnMovementUpdate movementUpdate;
 
+    public Vector3 GetDirection { get { return lookPoint; }}
+
 
     private void Start()
     {
