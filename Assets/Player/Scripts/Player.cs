@@ -35,7 +35,7 @@ public class Player : Unit
         if(Input.GetButtonDown("Fire1"))
         {
             if(!weaponManager.GetCurrentWeapon) { Debug.Log("No weapon equipped"); return; }
-            weaponManager.GetCurrentWeapon.Shoot(movement.GetDirection);
+            weaponManager.GetCurrentWeapon.Shoot();
         }
     }
 

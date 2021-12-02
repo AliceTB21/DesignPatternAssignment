@@ -12,18 +12,20 @@ public class Enemy : Unit
     [SerializeField] protected float sightRadius;
     [SerializeField] protected LayerMask targetLayerMask;
     [SerializeField] protected float maxDetectionRage;
+
     [Header("Agent")]
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected float idleTimer;
     [SerializeField] protected Transform unitPos;
     [SerializeField] protected bool isWaiting = true;
-    [SerializeField] private Collider[] colliders;
+    [SerializeField] private SphereCollider colliders;
 
     protected Vector3 posToMove;
 
     protected enum EnemyState { Idle, Wandering, MoveToTarget, Attacking}
 
     public Transform GetUnitPos { get { return unitPos; } }
+
 
     protected virtual void UpdateState(Transform unitPos)
     {
@@ -75,6 +77,7 @@ public class Enemy : Unit
             agent = GetComponent<NavMeshAgent>();
 
         UpdateState(GetUnitPos);
+        colliders.radius = sightRadius;
     }
 
     private void Update()
