@@ -12,8 +12,11 @@ public class Weapon : MonoBehaviour
     {
         if(currentAmmo <= 0) { Debug.Log("No ammo"); return; }
         Projectile queueBullet = Manager.Instance.GetPool.SpawnBulletPool();
-        queueBullet.transform.position = bulletSpawnPos.position;
+        queueBullet.GetRB.velocity = Vector3.zero;
+        queueBullet.GetRB.angularVelocity = Vector3.zero;
         queueBullet.SetDirection(bulletSpawnPos);
+        queueBullet.transform.position = bulletSpawnPos.position;
+
         currentAmmo--;
     }
 

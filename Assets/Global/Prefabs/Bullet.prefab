@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileDamage: 25
   projectileSpeed: 5
-  rb: {fileID: 0}
+  rb: {fileID: -3123007576998997074}
   direction: {fileID: 0}
   timeUntilPool: 5
 --- !u!54 &-3123007576998997074

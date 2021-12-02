@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour
     private float timer;
 
 
+    public Rigidbody GetRB { get { return rb; } }
+
     private void Start()
     {
         if (!rb)
