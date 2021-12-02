@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,15 @@ public class Unit : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         stats.OnTakeDamage(damage);
+        if(stats.Health <= 0)
+        {
+            Death();
+        }
         Debug.Log(unitName + " was hit for: " + damage);
+    }
+
+    protected virtual void Death()
+    {
+
     }
 }

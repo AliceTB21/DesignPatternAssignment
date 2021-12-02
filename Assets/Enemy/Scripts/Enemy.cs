@@ -30,6 +30,11 @@ public class Enemy : Unit
 
     }
 
+    protected override void Death()
+    {
+        Destroy(gameObject);
+    }
+
     protected virtual void DecideAction(EnemyState state)
     {
 
