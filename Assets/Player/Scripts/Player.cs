@@ -7,9 +7,16 @@ public class Player : Unit
     public delegate void OnHealthChanged(float oldHealth, float newHealth);
     public event OnHealthChanged onHealthChanged;
 
+    [SerializeField] private WeaponManager weaponManager;
     public float GetHealth { get { return stats.Health; } }
 
-    public override void TakeDamage(float damage)
+    private void Start()
+    {
+        if(!weaponManager)
+        weaponManager = GetComponent<WeaponManager>();
+    }
+
+    public override void TakeDamage(float damage) // Substracts health with damage and invokes the onHealthChanged to subscribed methods
     {
         onHealthChanged.Invoke(stats.Health, stats.Health - damage);
         base.TakeDamage(damage);
@@ -21,6 +28,11 @@ public class Player : Unit
         if(Input.GetKeyDown(KeyCode.E)) // Take damage by pressing E for testing purposes
         {
             TakeDamage(2);
+        }
+        if(Input.GetButtonDown("Fire1"))
+        {
+            if(!weaponManager.GetCurrentWeapon) { Debug.Log("No weapon equipped"); return; }
+            weaponManager.GetCurrentWeapon.Shoot();
         }
     }
 

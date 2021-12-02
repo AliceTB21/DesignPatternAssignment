@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int currentAmmo;
+    [SerializeField] private int maxAmmo;
+    [SerializeField] Transform bulletSpawnPos;
+
+    public void Shoot()
     {
-        
+        if(currentAmmo <= 0) { Debug.Log("No ammo"); return; }
+        Projectile queueBullet = Manager.Instance.GetPool.SpawnBulletPool();
+        queueBullet.transform.position = bulletSpawnPos.position;
+        currentAmmo--;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartReload()
     {
-        
+
     }
 }

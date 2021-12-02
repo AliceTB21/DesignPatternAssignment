@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Queue<GameObject> bulletPool = new Queue<GameObject>();
+    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private Queue<Projectile> bulletPool = new Queue<Projectile>();
     [SerializeField] private int poolSize = 30;
 
 
     private void Start()
     {
         StartPool();
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void StartPool() // Runs at start to instantiate the bullets
@@ -28,27 +23,27 @@ public class BulletPool : MonoBehaviour
                 Debug.LogError("Projectile prefab null");
                 return;
             }
-            GameObject bulletGO = Instantiate(projectilePrefab);
-            bulletGO.SetActive(false);
+            Projectile bulletGO = Instantiate(projectilePrefab);
+            bulletGO.gameObject.SetActive(false);
             bulletPool.Enqueue(bulletGO);
         }
     }
 
-    public GameObject SpawnBulletPool() // Attempts to dequeue a bullet and instantiates if there's none
+    public Projectile SpawnBulletPool() // Attempts to dequeue a bullet and instantiates if there's none
     {
-        if (bulletPool.TryDequeue(out GameObject bullet))
+        if (bulletPool.TryDequeue(out Projectile bullet))
         {
-            bullet.SetActive(true);
-            bullet.GetComponent<Projectile>().RestartTimer();
+            bullet.gameObject.SetActive(true);
+            bullet.RestartTimer();
             return bullet;
         }
         else
             return Instantiate(projectilePrefab);
     }
 
-    public void ReturnToPool(GameObject bullet)
+    public void ReturnToPool(Projectile bullet) // Tells the bullet to enter the queue
     {
-        bullet.SetActive(false);
+        bullet.gameObject.SetActive(false);
         bulletPool.Enqueue(bullet);
     }
 }
