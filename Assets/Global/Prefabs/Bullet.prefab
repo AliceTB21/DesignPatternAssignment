@@ -115,7 +115,7 @@ MonoBehaviour:
   projectileSpeed: 5
   rb: {fileID: -3123007576998997074}
   direction: {fileID: 0}
-  timeUntilPool: 5
+  timeUntilPool: 3
 --- !u!54 &-3123007576998997074
 Rigidbody:
   m_ObjectHideFlags: 0

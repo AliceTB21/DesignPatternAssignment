@@ -37,6 +37,11 @@ public class Player : Unit
             if(!weaponManager.GetCurrentWeapon) { Debug.Log("No weapon equipped"); return; }
             weaponManager.GetCurrentWeapon.Shoot();
         }
+        if(Input.GetButtonDown("Reload"))
+        {
+            if (!weaponManager.GetCurrentWeapon) { Debug.Log("No weapon equipped"); return; }
+            weaponManager.GetCurrentWeapon.StartReload();
+        }
     }
 
 }

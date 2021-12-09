@@ -22,6 +22,8 @@ public class Weapon : MonoBehaviour
 
     public void StartReload()
     {
+        currentAmmo = maxAmmo;
+        Debug.Log("Reloaded weapon");
 
     }
 }
